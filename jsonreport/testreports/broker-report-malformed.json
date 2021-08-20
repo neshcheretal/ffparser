@@ -1,0 +1,37 @@
+[ 
+{
+  "date_start": "2020-07-31 23:59:59",
+  "date_end": "2021-01-01 23:59:59",
+  "plainAccountInfoData": {},
+  "accountInfo": [],
+  "userLanguage": "ru",
+  "trades": {
+    "detailed": [ ],
+    "securities": {},
+    "total": {},
+    "prtotal": {}
+  },
+  "account_at_start": {}
+  },
+  "account_at_end": {}
+  },
+  "off_balance_money": {},
+  "off_balance_securities": {},
+  "off_balance_securities_prices": {},
+  "off_balance_securities_accounts": {},
+  "cash_flows": {},
+  "cash_in_outs": [],
+  "in_outs_securities": {},
+  "securities_in_outs": [],
+  "commissions": {
+    "detailed": [],
+    "total": {}
+  },
+  "corporate_actions": {
+    "detailed": [],
+    "total": {}
+  },
+  "ffbo_trades_offsetting": [],
+  "cash_flows_json": [],
+  "securities_flows_off_balance_json": []
+}
