@@ -1,4 +1,4 @@
-# Freefom Finance Europe Report Parser
+# Freedom Finance Europe Report Parser
 
 Translations:
 
