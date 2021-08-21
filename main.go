@@ -35,5 +35,7 @@ func main() {
 	tax_report := excel.ExelCreate(tradeCh, divCh, inputValues.ReportLang)
 	if err := tax_report.SaveAs(inputValues.OutputFile); err != nil {
 		fmt.Printf("Failed to save report file %v: %v", inputValues.OutputFile, err)
+	} else {
+		fmt.Printf("Report file %v has been successfully generated", inputValues.OutputFile)
 	}
 }
