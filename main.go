@@ -13,14 +13,14 @@ func main() {
 	// Get user input and convert it to a proper format
 	inputValues, err := validator.InputParse()
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("Error while parsing cli arguments: %v", err)
 		return
 	}
 
 	// Parse the broker report JSON file
 	jsonParsedReport, err := jsonreport.ParseJsonReport(inputValues.FileName)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("Error while parsing broker report json file: %v", err)
 		return
 	}
 
@@ -34,6 +34,6 @@ func main() {
 	// Pass channels with results of calculation to excel report prep function
 	tax_report := excel.ExelCreate(tradeCh, divCh, inputValues.ReportLang)
 	if err := tax_report.SaveAs(inputValues.OutputFile); err != nil {
-		fmt.Println(err)
+		fmt.Printf("Failed to save report file %v: %v", inputValues.OutputFile, err)
 	}
 }

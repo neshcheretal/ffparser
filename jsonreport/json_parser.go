@@ -56,7 +56,6 @@ func ParseJsonReport(filename string) (JsonReport, error) {
 	jsonFile, err := os.Open(filename)
 	// if we os.Open returns an error then handle it
 	if err != nil {
-		fmt.Println(err)
 		return JsonReport{}, err
 	}
 	// defer the closing of our jsonFile so that we can parse it later on
@@ -64,7 +63,6 @@ func ParseJsonReport(filename string) (JsonReport, error) {
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 	dec := json.NewDecoder(bytes.NewReader(byteValue))
 	if err := dec.Decode(&jsonParsedReport); err != nil {
-		fmt.Println("Decode error:", err)
 		return JsonReport{}, err
 	}
 	return jsonParsedReport, nil

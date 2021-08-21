@@ -51,7 +51,6 @@ func OrderListPreparator(jsonOrders []jsonreport.JsonOrder) ([]Order, error) {
 	for _, trade := range jsonOrders {
 		orderDate, err := time.Parse(dateLayout, trade.Date)
 		if err != nil {
-			fmt.Println(err)
 			return nil, err
 		}
 
@@ -72,7 +71,6 @@ func OrderListPreparator(jsonOrders []jsonreport.JsonOrder) ([]Order, error) {
 		orderComission := trade.Commission
 		orderUsdPriceUah, err := nbu.GetConversionRates(orderDate, orderCurrency)
 		if err != nil {
-			fmt.Println(err)
 			return nil, err
 		}
 
@@ -90,32 +88,6 @@ func OrderListPreparator(jsonOrders []jsonreport.JsonOrder) ([]Order, error) {
 	}
 	return orders, nil
 }
-
-// func stockOrderSplitReEvaluation(splits []SecurityIN, orders []Order) {
-//     for _, split := range splits {
-//         fmt.Println(split)
-//         for index, order := range orders {
-//
-//             if order.Date.After(split.Datetime) {
-//                 // we dont need to recalculate orders after split date
-//                 fmt.Println("Orders are older, then current split, breaking inner loop")
-//                 break
-//             }
-//             if order.Ticker != split.OldTicker {
-//                 fmt.Println("Orders ticker is different from split, thu skip order")
-//                 continue
-//             }
-//             fmt.Printf("Order %v should be reconsidered due to split %v", order, split)
-//             currentOrder := &orders[index]
-//             if  currentOrder.Ticker != split.NewTicker {
-//                 currentOrder.Ticker = split.NewTicker
-//             }
-//             currentOrder.Quantity    = currentOrder.Quantity*split.NewCount
-//             currentOrder.Price    = currentOrder.Price/float64(split.NewCount)
-//
-//         }
-//     }
-// }
 
 //Receive pased execl report
 func OrdersStockParser(orders []Order) map[string]StockOrders {

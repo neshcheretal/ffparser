@@ -135,7 +135,7 @@ func ExelCreate(tch <-chan map[string][]trading.Trade, dch <-chan []dividends.Ca
 	// Set table headers format
 	style, err := f.NewStyle(`{"font":{"bold":true}}`)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("Failed to set font style: %v", err)
 	}
 	for k, v := range tradeColumnFormat {
 		f.SetColWidth(sheet1Name, k, k, v.Width)

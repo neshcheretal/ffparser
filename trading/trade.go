@@ -131,13 +131,13 @@ func StockTradePreparationWrapper(jsonResport jsonreport.JsonReport, startDate t
 
 	stockOrderList, err := OrderListPreparator(jsonResport.Trades.Detailed)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("Failed to prepare order list: %v", err)
 		os.Exit(1)
 	}
 
 	stockSplits, err := SplitsStockParser(jsonResport.Securities_in_outs)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("Failed to process stock split: %v", err)
 		os.Exit(1)
 	}
 	stockOrderSplitReEvaluation(stockSplits, stockOrderList)

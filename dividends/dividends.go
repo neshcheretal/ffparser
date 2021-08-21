@@ -19,11 +19,6 @@ type CashFlow struct {
 	Comment  string
 }
 
-// type CashFlowResult struct {
-//     Flows []CashFlow
-//     Error error
-// }
-
 //Receive pased execl report
 func CashFlowParser(jsonParsedFlows []jsonreport.JsonCashFlow) ([]CashFlow, error) {
 	resultFlows := make([]CashFlow, 0)
@@ -32,7 +27,6 @@ func CashFlowParser(jsonParsedFlows []jsonreport.JsonCashFlow) ([]CashFlow, erro
 	for _, flow := range jsonParsedFlows {
 		flowDate, err := time.Parse(dateLayout, flow.Date)
 		if err != nil {
-			fmt.Println(err)
 			return nil, err
 		}
 		flowAccount := flow.Account
@@ -41,7 +35,6 @@ func CashFlowParser(jsonParsedFlows []jsonreport.JsonCashFlow) ([]CashFlow, erro
 
 		flowUsdPriceUah, err := nbu.GetConversionRates(flowDate, flowCurrency)
 		if err != nil {
-			fmt.Println(err)
 			return nil, err
 		}
 		flowTypeId := flow.Type_id
@@ -92,7 +85,7 @@ func FilterDateFlows(flows []CashFlow, startDate time.Time, endDate time.Time) [
 func DividendsPreparationWrapper(flows []jsonreport.JsonCashFlow, startDate time.Time, endDate time.Time, ch chan []CashFlow) {
 	allDividendFlows, err := CashFlowParser(flows)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("Error while parsing dividend cash flow: %v", err)
 		os.Exit(1)
 	}
 	dateFilteredDividendFlows := FilterDateFlows(allDividendFlows, startDate, endDate)
