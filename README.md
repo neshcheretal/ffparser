@@ -9,5 +9,5 @@ Translations:
 # Program build
 
 ```
-$ go build -o terraform-provider-wafrule
+$ go build -o ffparser
 $ ./ffparser -report=full-report.json -start=2020-01-01 -lang=UA -output=results.xlsx
