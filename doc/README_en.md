@@ -27,7 +27,7 @@ For the correct calculation of the results of transactions, regardless of the pe
 - 1.5% Military tax
 - 9% Dividend income
 
-It is important to note that the program works correctly only with "long" positions if there is a "short" positions made, the calculation may be incorrect. Also it should be noted that it does not take into account the declaration requirements given in subparagraphs [170.2.4-170.2.6] (https://zakon.rada.gov.ua/laws/show/2755-17?lang=ru#n3998) and in the case of such transactions, the final sum to declare must be reviewed separately.
+It is important to note that the program works correctly only with "long" positions if there is a "short" positions made, the calculation may be incorrect. Also it should be noted that it does not take into account the declaration requirements given in subparagraphs [170.2.4-170.2.6](https://zakon.rada.gov.ua/laws/show/2755-17?lang=en#n3998) and in the case of such transactions, the final sum to declare must be reviewed separately.
 
 #### Calculation format
 The calculation results are provided as an xlsx file with three tabs:
