@@ -1,4 +1,4 @@
-### Freedom Finance Europe Report Parser
+### FF Broker Report Parser
 #### About the program
 
 This program is designed to process brokerage reports from Freedom Finance Europe in order to prepare tax reports for the State Tax Service of Ukraine. In accordance with article 170, paragraph 2 of the Tax Code of Ukraine: "Investment profit is calculated as the positive difference between the income received by the taxpayer from the sale of a separate investment asset, taking into account the exchange rate difference (if any), and its value, which is determined from the amount of documented acquisition costs such an asset, taking into account the norms of sub-clauses 170.2.4-170.2.6 of this clause (except for operations with derivatives) ".
@@ -14,6 +14,13 @@ The command is an executable binary file and is intended to be run from the comm
 
 Launch exaple for MacOS/Linux
 > ./ffparser -report=full-report.json -start=2020-08-01 -lang=UA -output=results.xlsx
+
+#### How to get brokerage report
+In order to get brokerage report you have to log in to Freedom Finance Europe trading terminal and the follow the next sequence:
+
+Menu > BROKERAGE REPORTS > BROKER REPORT > Report for the period
+
+The period MUST be set from the day when brokerage account was open. Then chose a JSON format and download the file.
 
 #### Calculation features
 For the correct calculation of the results of transactions, regardless of the period that will be declared, it is necessary to use a full brokerage report for the entire period of work starting from the day the brokerage account was opened, for example, an asset sold in 2021 could be purchased in 2020 and all data is required to calculate a closed transaction. The program calculates the income from the saling of stocks and recived dividends. The tax amount is calculated acorfing to following rates:
