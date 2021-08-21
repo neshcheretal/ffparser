@@ -38,5 +38,5 @@ It should be mentioned that if there is a stock split ocures inside calculated p
 The final report will display two closed trades
 | Ticker | Purchase date | Quantity | Purchase price | Sale date | Selling price |
 --------|--------------|------------|--------------|--------------|--------------|
-| BEST | 1 января | 3 | 100$ | 2 января | 100$ |
-| BEST | 1 января | 1 | 100$ | 2 января | 100$ |
+| BEST | 1 January | 3 | 100$ | 2 January | 100$ |
+| BEST | 1 January | 1 | 100$ | 2 January | 100$ |
