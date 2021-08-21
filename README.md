@@ -2,9 +2,9 @@
 
 Translations:
 
-* [Українська](language/README_ua.md)
-* [Русский](language/README_ru.md)
-* [English](language/README_en.md)
+* [Українська](doc/README_ua.md)
+* [Русский](doc/README_ru.md)
+* [English](doc/README_en.md)
 
 ## Program build
 
