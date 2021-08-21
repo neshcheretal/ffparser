@@ -6,14 +6,13 @@ Despite the fact that brokerage reports provide detailed information about the i
 
 #### Usage and launch:
 The command is an executable binary file and is intended to be run from the command line. The launch options are listed below:
-   - -end End day for calculating the made deals in the YYYY-MM-DD format.
-   - -start Start day for calculating the made deals in the YYYY-MM-DD format.
+   - -year A year for which tax should be calculated in YYYY format. (Required)
    - -lang Report language. Supported languages are: UA, RU, EN. (default "EN")
    - -output Name of the xlsx file with results ("tax_calculation.xlsx" by default)
    - -report Path to the JSON file of the FF broker report. (Required)
 
 Launch exaple for MacOS/Linux
-> ./ffparser -report=full-report.json -start=2020-08-01 -lang=UA -output=results.xlsx
+> ./ffparser -report=full-report.json -year=2020 -lang=UA -output=results.xlsx
 
 #### How to get brokerage report
 In order to get brokerage report you have to log in to Freedom Finance Europe trading terminal and the follow the next sequence:

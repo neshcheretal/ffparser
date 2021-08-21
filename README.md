@@ -10,4 +10,4 @@ Translations:
 
 ```
 $ go build -o ffparser
-$ ./ffparser -report=full-report.json -start=2020-01-01 -lang=UA -output=results.xlsx
+$ ./ffparser -report=full-report.json -year=2020 -lang=UA -output=results.xlsx
