@@ -6,7 +6,7 @@ Translations:
 * [Русский](language/README_ru.md)
 * [English](language/README_en.md)
 
-# Provider build
+# Program build
 
 ```
 $ go build -o terraform-provider-wafrule
