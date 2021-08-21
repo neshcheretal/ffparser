@@ -2,6 +2,6 @@
 
 Translations:
 
-* [Українська](README_ua.md)
-* [Русский](README_ru.md)
-* [English](README_en.md)
+* [Українська](language/README_ua.md)
+* [Русский](language/README_ru.md)
+* [English](language/README_en.md)
