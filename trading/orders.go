@@ -1,7 +1,6 @@
 package trading
 
 import (
-	"fmt"
 	"github.com/neshcheretal/ffparser/jsonreport"
 	"github.com/neshcheretal/ffparser/nbu"
 	"strings"

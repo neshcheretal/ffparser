@@ -3,7 +3,6 @@ package jsonreport
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 )
