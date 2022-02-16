@@ -1,6 +1,5 @@
 package language
 
-
 type Language struct {
 	Dictionary map[string]string
 }
@@ -8,6 +7,7 @@ type Language struct {
 var UaLang = map[string]string{
 	"buy":                    "Купівля",
 	"sell":                   "Продаж",
+	"maturity":            "Погашення",
 	"ticker":                 "Акція",
 	"tradeNumber":            "Номер Продажу",
 	"tradeOpenDate":          "Дата Відкриття",
@@ -33,14 +33,17 @@ var UaLang = map[string]string{
 	"dividendTotalUahProfit": "Оподатковуваний Дивідендний Дохід",
 	"dividendIncomeTax":      "ПДФО 9%",
 	"dividendMilitaryTax":    "Військовий збір 1.5%",
+	"details":                "Опис операції",
 	"Sheet1":                 "Трейдінг",
 	"Sheet2":                 "Дивіденди",
 	"Sheet3":                 "Податки",
+	"Sheet4":                 "Деталі",
 }
 
 var RuLang = map[string]string{
 	"buy":                    "Покупка",
 	"sell":                   "Продажа",
+	"maturity":            "Погашение",
 	"ticker":                 "Акция",
 	"tradeNumber":            "Номер Сделки",
 	"tradeOpenDate":          "Дата Открытия",
@@ -66,14 +69,17 @@ var RuLang = map[string]string{
 	"dividendTotalUahProfit": "Облагаемый Дивидендный Доход",
 	"dividendIncomeTax":      "НДФЛ 9%",
 	"dividendMilitaryTax":    "Военный сбор 1.5%",
+	"details":                "Описание операции",
 	"Sheet1":                 "Трейдинг",
 	"Sheet2":                 "Дивиденды",
 	"Sheet3":                 "Налоги",
+	"Sheet4":                 "Детали",
 }
 
 var EnLang = map[string]string{
 	"buy":                    "Buy",
 	"sell":                   "Sell",
+	"maturity":            "Maturity",
 	"ticker":                 "Stock Tiker",
 	"tradeNumber":            "Stock Trade Number",
 	"tradeOpenDate":          "Open Date",
@@ -99,7 +105,9 @@ var EnLang = map[string]string{
 	"dividendTotalUahProfit": "Dividend Total UAH profit",
 	"dividendIncomeTax":      "Income tax 9%",
 	"dividendMilitaryTax":    "Military tax 1.5%",
+	"details":                "Operation description",
 	"Sheet1":                 "Trading",
 	"Sheet2":                 "Dividends",
 	"Sheet3":                 "Taxes",
+	"Sheet4":                 "Details",
 }

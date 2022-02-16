@@ -46,30 +46,51 @@ var tradeColumnFormat = map[string]ColumnFormat{
 		12.0,
 		"tradeClosePrice",
 	},
+	// "I": ColumnFormat{
+	// 	16.0,
+	// 	"tradeCloseComission",
+	// },
+	// "J": ColumnFormat{
+	// 	18,
+	// 	"tradeCloseCurrencyRate",
+	// },
+	// "K": ColumnFormat{
+	// 	9.5,
+	// 	"tradeStockQuantity",
+	// },
+	// "L": ColumnFormat{
+	// 	21.0,
+	// 	"tradeCloseCostUAH",
+	// },
+	// "M": ColumnFormat{
+	// 	21.0,
+	// 	"tradeOpenCostUAH",
+	// },
+	// "N": ColumnFormat{
+	// 	17.0,
+	// 	"tradeProfitUAH",
+	// },
 	"I": ColumnFormat{
-		16.0,
-		"tradeCloseComission",
-	},
-	"J": ColumnFormat{
 		18,
 		"tradeCloseCurrencyRate",
 	},
-	"K": ColumnFormat{
+	"J": ColumnFormat{
 		9.5,
 		"tradeStockQuantity",
 	},
-	"L": ColumnFormat{
+	"K": ColumnFormat{
 		21.0,
 		"tradeCloseCostUAH",
 	},
-	"M": ColumnFormat{
+	"L": ColumnFormat{
 		21.0,
 		"tradeOpenCostUAH",
 	},
-	"N": ColumnFormat{
+	"M": ColumnFormat{
 		17.0,
 		"tradeProfitUAH",
 	},
+
 }
 
 var dividendColumnFormat = map[string]ColumnFormat{
@@ -125,11 +146,20 @@ var dividendTaxColumnFormat = map[string]ColumnFormat{
 	},
 }
 
+var detailColumnFormat = map[string]ColumnFormat{
+	"A": ColumnFormat{
+		90,
+		"detals",
+	},
+}
+
 func ExelCreate(tch <-chan map[string][]trading.Trade, dch <-chan []dividends.CashFlow, reportLang language.Language) *excelize.File {
 	f := excelize.NewFile()
 	sheet1Name := reportLang.Dictionary["Sheet1"]
 	sheet2Name := reportLang.Dictionary["Sheet2"]
 	sheet3Name := reportLang.Dictionary["Sheet3"]
+	sheet4Name := reportLang.Dictionary["Sheet4"]
+
 	f.SetSheetName("Sheet1", sheet1Name)
 
 	// Set table headers format
@@ -137,6 +167,15 @@ func ExelCreate(tch <-chan map[string][]trading.Trade, dch <-chan []dividends.Ca
 	if err != nil {
 		fmt.Printf("Failed to set font style: %v", err)
 	}
+
+	// generate declaration details sheet
+	f.NewSheet(sheet4Name)
+	for k, v := range detailColumnFormat {
+		f.SetColWidth(sheet2Name, k, k, v.Width)
+		f.SetCellValue(sheet2Name, k+"1", reportLang.Dictionary[v.Head])
+		f.SetCellStyle(sheet2Name, k+"1", k+"1", style)
+	}
+
 	for k, v := range tradeColumnFormat {
 		f.SetColWidth(sheet1Name, k, k, v.Width)
 		f.SetCellValue(sheet1Name, k+"1", reportLang.Dictionary[v.Head])
@@ -155,13 +194,21 @@ func ExelCreate(tch <-chan map[string][]trading.Trade, dch <-chan []dividends.Ca
 			f.SetCellValue(sheet1Name, fmt.Sprintf("F%d", tradeIndex), trade.OpenUahRate)
 			f.SetCellValue(sheet1Name, fmt.Sprintf("G%d", tradeIndex), trade.CloseDate)
 			f.SetCellValue(sheet1Name, fmt.Sprintf("H%d", tradeIndex), trade.ClosePrice)
-			f.SetCellValue(sheet1Name, fmt.Sprintf("I%d", tradeIndex), trade.CloseComission)
-			f.SetCellValue(sheet1Name, fmt.Sprintf("J%d", tradeIndex), trade.CloseUahRate)
-			f.SetCellValue(sheet1Name, fmt.Sprintf("K%d", tradeIndex), trade.Quantity)
-			f.SetCellFormula(sheet1Name, fmt.Sprintf("L%d", tradeIndex), fmt.Sprintf("ROUND(((H%[1]d*K%[1]d-I%[1]d)*J%[1]d); 2)", tradeIndex))
-			f.SetCellFormula(sheet1Name, fmt.Sprintf("M%d", tradeIndex), fmt.Sprintf("ROUND(((D%[1]d*K%[1]d+E%[1]d)*F%[1]d); 2)", tradeIndex))
-			f.SetCellFormula(sheet1Name, fmt.Sprintf("N%d", tradeIndex), fmt.Sprintf("L%[1]d-M%[1]d", tradeIndex))
+			// f.SetCellValue(sheet1Name, fmt.Sprintf("I%d", tradeIndex), trade.CloseComission)
+			// f.SetCellValue(sheet1Name, fmt.Sprintf("J%d", tradeIndex), trade.CloseUahRate)
+			// f.SetCellValue(sheet1Name, fmt.Sprintf("K%d", tradeIndex), trade.Quantity)
+			// f.SetCellFormula(sheet1Name, fmt.Sprintf("L%d", tradeIndex), fmt.Sprintf("ROUND(((H%[1]d*K%[1]d-I%[1]d)*J%[1]d); 2)", tradeIndex))
+			// f.SetCellFormula(sheet1Name, fmt.Sprintf("M%d", tradeIndex), fmt.Sprintf("ROUND(((D%[1]d*K%[1]d+E%[1]d)*F%[1]d); 2)", tradeIndex))
+			// f.SetCellFormula(sheet1Name, fmt.Sprintf("N%d", tradeIndex), fmt.Sprintf("L%[1]d-M%[1]d", tradeIndex))
+			f.SetCellValue(sheet1Name, fmt.Sprintf("I%d", tradeIndex), trade.CloseUahRate)
+			f.SetCellValue(sheet1Name, fmt.Sprintf("J%d", tradeIndex), trade.Quantity)
+			f.SetCellFormula(sheet1Name, fmt.Sprintf("K%d", tradeIndex), fmt.Sprintf("ROUND(((H%[1]d*K%[1]d)*I%[1]d); 2)", tradeIndex))
+			f.SetCellFormula(sheet1Name, fmt.Sprintf("L%d", tradeIndex), fmt.Sprintf("ROUND(((D%[1]d*K%[1]d+E%[1]d)*F%[1]d); 2)", tradeIndex)) // we use only Open Comission according to rule, CloseComission is not used
+			f.SetCellFormula(sheet1Name, fmt.Sprintf("M%d", tradeIndex), fmt.Sprintf("K%[1]d-L%[1]d", tradeIndex))
+			// generate details
+			f.SetCellValue(sheet4Name, fmt.Sprintf("A%d", tradeIndex), fmt.Sprintf("акція %v %d шт / куплено %v/ продано %v", stock, trade.Quantity, trade.OpenDate, trade.CloseDate))
 			tradeIndex += 1
+
 		}
 	}
 	lastTradeIndex := tradeIndex - 1
@@ -203,5 +250,6 @@ func ExelCreate(tch <-chan map[string][]trading.Trade, dch <-chan []dividends.Ca
 	f.SetCellFormula(sheet3Name, "A5", fmt.Sprintf("SUM(%v!E2:%v!E%d)", sheet2Name, sheet2Name, lastDividendIndex))
 	f.SetCellFormula(sheet3Name, "B5", "ROUND((A5/100)*9; 2)")
 	f.SetCellFormula(sheet3Name, "C5", "ROUND((A5/100)*1.5; 2)")
+
 	return f
 }
