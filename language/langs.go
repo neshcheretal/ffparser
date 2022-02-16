@@ -1,5 +1,6 @@
 package language
 
+
 type Language struct {
 	Dictionary map[string]string
 }
