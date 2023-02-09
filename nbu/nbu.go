@@ -45,14 +45,18 @@ func GetConversionRates(date time.Time, currency string) (float64, error) {
 		// If rate not in local map make request to NBU rate API
 		currencyRates := make([]Currency, 0)
 		url := "https://bank.gov.ua/NBU_Exchange/exchange?json&date=" + nbuDateFormatString
+
 		resp, err := Client.Get(url)
 		if err != nil {
 			return float64(0), err
 		}
 		defer resp.Body.Close()
+
 		json.NewDecoder(resp.Body).Decode(&currencyRates)
 
+
 		for _, rate := range currencyRates {
+
 			if rate.CurrencyCodeL == currency {
 				dateRateMap.Store(fmt.Sprintf("%s/%s", currency, nbuDateFormatString), rate.Amount)
 				//dateRateMap[fmt.Sprintf("%s/%s", currency, nbuDateFormatString)] = rate.Amount

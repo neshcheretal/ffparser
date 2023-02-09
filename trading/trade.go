@@ -10,7 +10,9 @@ import (
 
 type Trade struct {
 	OpenDate       time.Time
+	OpenPayDate    time.Time
 	CloseDate      time.Time
+	ClosePayDate   time.Time
 	OpenPrice      float64
 	OpenUahRate    float64
 	ClosePrice     float64
@@ -37,6 +39,7 @@ func AllTradeListPrepare(t StockOrders) []Trade {
 				trade_sell_comission = sellTransaction.Comission * float64(buyTransaction.Quantity) / float64(sellTransaction.Quantity)
 				sellQueue[0] = Order{
 					sellTransaction.Date,
+					sellTransaction.PayDate,
 					sellTransaction.Ticker,
 					sellTransaction.Transaction,
 					sellTransaction.Quantity - buyTransaction.Quantity,
@@ -72,6 +75,7 @@ func AllTradeListPrepare(t StockOrders) []Trade {
 				sellQueue = sellQueue[1:]
 				buyQueue[0] = Order{
 					buyTransaction.Date,
+					buyTransaction.PayDate,
 					buyTransaction.Ticker,
 					buyTransaction.Transaction,
 					buyTransaction.Quantity - sellTransaction.Quantity,
@@ -83,7 +87,9 @@ func AllTradeListPrepare(t StockOrders) []Trade {
 			}
 			madeTrade := Trade{
 				buyTransaction.Date,
+				buyTransaction.PayDate,
 				sellTransaction.Date,
+				sellTransaction.PayDate,
 				buyTransaction.Price,
 				buyTransaction.UahRate,
 				sellTransaction.Price,

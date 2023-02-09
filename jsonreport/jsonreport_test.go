@@ -17,7 +17,7 @@ func TestParseJsonReport(t *testing.T) {
 			Filename: "testreports/broker-report-1.json",
 			Expected: JsonReport{
 				JsonDetailedTradeReport{
-					[]JsonOrder{JsonOrder{"2020-09-03 16:30:00", "TEST.US", "buy", 1, 100.0, "USD", 2.0, "USD"}, JsonOrder{"2020-09-04 16:30:00", "TEST.US", "sell", 1, 101.0, "USD", 2.0, "USD"}},
+					[]JsonOrder{JsonOrder{"2020-09-03 16:30:00", "2020-09-03", "TEST.US", "buy", 1, 100.0, "USD", 2.0, "USD"}, JsonOrder{"2020-09-04 16:30:00", "2020-09-04", "TEST.US", "sell", 1, 101.0, "USD", 2.0, "USD"}},
 				},
 				JsonDetailedCashReport{},
 				nil,
@@ -29,7 +29,7 @@ func TestParseJsonReport(t *testing.T) {
 			Filename: "testreports/broker-report-2.json",
 			Expected: JsonReport{
 				JsonDetailedTradeReport{
-					[]JsonOrder{JsonOrder{"2020-09-03 16:30:00", "TEST.US", "buy", 1, 100.0, "USD", 2.0, "USD"}, JsonOrder{"2020-09-04 16:30:00", "TEST.US", "sell", 1, 101.0, "USD", 2.0, "USD"}},
+					[]JsonOrder{JsonOrder{"2020-09-03 16:30:00", "2020-09-03", "TEST.US", "buy", 1, 100.0, "USD", 2.0, "USD"}, JsonOrder{"2020-09-04 16:30:00", "2020-09-04", "TEST.US", "sell", 1, 101.0, "USD", 2.0, "USD"}},
 				},
 				JsonDetailedCashReport{
 					[]JsonCashFlow{JsonCashFlow{"2020-09-03", "торговый", 10, "USD", "dividend", "Dividends from kind people"}},
@@ -43,7 +43,7 @@ func TestParseJsonReport(t *testing.T) {
 			Filename: "testreports/broker-report-3.json",
 			Expected: JsonReport{
 				JsonDetailedTradeReport{
-					[]JsonOrder{JsonOrder{"2020-09-03 16:30:00", "TEST.US", "buy", 1, 100.0, "USD", 2.0, "USD"}, JsonOrder{"2020-09-04 16:30:00", "TEST.US", "sell", 1, 101.0, "USD", 2.0, "USD"}},
+					[]JsonOrder{JsonOrder{"2020-09-03 16:30:00", "2020-09-03", "TEST.US", "buy", 1, 100.0, "USD", 2.0, "USD"}, JsonOrder{"2020-09-04 16:30:00", "2020-09-04", "TEST.US", "sell", 1, 101.0, "USD", 2.0, "USD"}},
 				},
 				JsonDetailedCashReport{
 					[]JsonCashFlow{JsonCashFlow{"2020-09-03", "торговый", 10, "USD", "dividend", "Dividends from kind people"}},

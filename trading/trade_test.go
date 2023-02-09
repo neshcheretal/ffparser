@@ -18,15 +18,17 @@ func TestAllTradeListPrepare(t *testing.T) {
 		{
 			Name: "1 buy/1sell",
 			TestOrders: StockOrders{
-				[]Order{Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TEST", "buy", 1, 100.0, 27.6428, "USD", 2.0}},
+				[]Order{Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC), "TEST", "buy", 1, 100.0, 27.6428, "USD", 2.0}},
 				1,
-				[]Order{Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TEST", "sell", 1, 101.0, 27.6908, "USD", 2.}},
+				[]Order{Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC), "TEST", "sell", 1, 101.0, 27.6908, "USD", 2.}},
 				1,
 			},
 			Expected: []Trade{
 				Trade{
 					time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC),
 					time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC),
 					100.0,
 					27.6428,
 					101.0,
@@ -41,17 +43,19 @@ func TestAllTradeListPrepare(t *testing.T) {
 			Name: "1 buy/1buy/1sell",
 			TestOrders: StockOrders{
 				[]Order{
-					Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TEST", "buy", 1, 100.0, 27.6428, "USD", 2.0},
-					Order{time.Date(2020, time.September, 3, 16, 35, 0, 0, time.UTC), "TEST", "buy", 1, 100.5, 27.6428, "USD", 2.0},
+					Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC), "TEST", "buy", 1, 100.0, 27.6428, "USD", 2.0},
+					Order{time.Date(2020, time.September, 3, 16, 35, 0, 0, time.UTC), time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC), "TEST", "buy", 1, 100.5, 27.6428, "USD", 2.0},
 				},
 				1,
-				[]Order{Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TEST", "sell", 1, 101.0, 27.6908, "USD", 2.}},
+				[]Order{Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC),time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC), "TEST", "sell", 1, 101.0, 27.6908, "USD", 2.}},
 				1,
 			},
 			Expected: []Trade{
 				Trade{
 					time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC),
 					time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC),
 					100.0,
 					27.6428,
 					101.0,
@@ -66,17 +70,19 @@ func TestAllTradeListPrepare(t *testing.T) {
 			Name: "1buy/1buy/2sell",
 			TestOrders: StockOrders{
 				[]Order{
-					Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TEST", "buy", 1, 100.0, 27.6428, "USD", 2.0},
-					Order{time.Date(2020, time.September, 3, 16, 35, 0, 0, time.UTC), "TEST", "buy", 1, 100.5, 27.6428, "USD", 2.0},
+					Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC), "TEST", "buy", 1, 100.0, 27.6428, "USD", 2.0},
+					Order{time.Date(2020, time.September, 3, 16, 35, 0, 0, time.UTC), time.Date(2020, time.September, 3, 16, 35, 0, 0, time.UTC), "TEST", "buy", 1, 100.5, 27.6428, "USD", 2.0},
 				},
 				1,
-				[]Order{Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TEST", "sell", 2, 101.0, 27.6908, "USD", 2.}},
+				[]Order{Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC), "TEST", "sell", 2, 101.0, 27.6908, "USD", 2.}},
 				1,
 			},
 			Expected: []Trade{
 				Trade{
 					time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC),
 					time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC),
 					100.0,
 					27.6428,
 					101.0,
@@ -87,7 +93,9 @@ func TestAllTradeListPrepare(t *testing.T) {
 				},
 				Trade{
 					time.Date(2020, time.September, 3, 16, 35, 0, 0, time.UTC),
+					time.Date(2020, time.September, 3, 16, 35, 0, 0, time.UTC),
 					time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC),
 					100.5,
 					27.6428,
 					101.0,
@@ -103,23 +111,25 @@ func TestAllTradeListPrepare(t *testing.T) {
 			TestOrders: StockOrders{
 				[]Order{
 					// 2 buy
-					Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TEST", "buy", 2, 100.0, 27.6428, "USD", 2.0},
+					Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC), "TEST", "buy", 2, 100.0, 27.6428, "USD", 2.0},
 					// 3 buy
-					Order{time.Date(2020, time.September, 7, 16, 30, 0, 0, time.UTC), "TEST", "buy", 3, 102.0, 27.7325, "USD", 2.1},
+					Order{time.Date(2020, time.September, 7, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 7, 16, 30, 0, 0, time.UTC), "TEST", "buy", 3, 102.0, 27.7325, "USD", 2.1},
 				},
 				1,
 				[]Order{
 					// 1sell
-					Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TEST", "sell", 1, 101.0, 27.6908, "USD", 2.0},
+					Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC), "TEST", "sell", 1, 101.0, 27.6908, "USD", 2.0},
 					// 2sell
-					Order{time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC), "TEST", "sell", 2, 104.0, 27.7509, "USD", 2.0},
+					Order{time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC), "TEST", "sell", 2, 104.0, 27.7509, "USD", 2.0},
 				},
 				1,
 			},
 			Expected: []Trade{
 				Trade{
 					time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC),
 					time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC),
 					100.0,
 					27.6428,
 					101.0,
@@ -130,6 +140,8 @@ func TestAllTradeListPrepare(t *testing.T) {
 				},
 				Trade{
 					time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC),
+					time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC),
 					time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC),
 					100.0,
 					27.6428,
@@ -141,6 +153,8 @@ func TestAllTradeListPrepare(t *testing.T) {
 				},
 				Trade{
 					time.Date(2020, time.September, 7, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 7, 16, 30, 0, 0, time.UTC),
+					time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC),
 					time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC),
 					102.0,
 					27.7325,
@@ -169,7 +183,9 @@ func TestFilterDateTrades(t *testing.T) {
 	TestTradeList := []Trade{
 		Trade{
 			time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC),
+			time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC),
 			time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC),
+			time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC),
 			100.0,
 			27.6428,
 			101.0,
@@ -248,7 +264,7 @@ func TestStockTradePreparationWrapper(t *testing.T) {
 
 	testCh := make(chan map[string][]Trade, 1)
 
-	testOrderList := []jsonreport.JsonOrder{jsonreport.JsonOrder{"2020-09-03 16:30:00", "TEST.US", "buy", 1, 100.0, "USD", 2.0, "USD"}, jsonreport.JsonOrder{"2020-09-04 16:30:00", "TEST.US", "sell", 1, 101.0, "USD", 2.0, "USD"}}
+	testOrderList := []jsonreport.JsonOrder{jsonreport.JsonOrder{"2020-09-03 16:30:00", "2020-09-03", "TEST.US", "buy", 1, 100.0, "USD", 2.0, "USD"}, jsonreport.JsonOrder{"2020-09-04 16:30:00", "2020-09-04", "TEST.US", "sell", 1, 101.0, "USD", 2.0, "USD"}}
 	testJsonReport := jsonreport.JsonReport{
 		jsonreport.JsonDetailedTradeReport{testOrderList},
 		jsonreport.JsonDetailedCashReport{},
@@ -258,7 +274,9 @@ func TestStockTradePreparationWrapper(t *testing.T) {
 		"TEST": []Trade{
 			Trade{
 				time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC),
+				time.Date(2020, time.September, 3, 0, 0, 0, 0, time.UTC),
 				time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC),
+				time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC),
 				100.0,
 				27.6428,
 				101.0,

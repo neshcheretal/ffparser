@@ -18,6 +18,7 @@ type JsonCashFlow struct {
 
 type JsonOrder struct {
 	Date                string
+	Pay_d               string
 	Instr_nm            string
 	Operation           string
 	Q                   int

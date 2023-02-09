@@ -81,52 +81,52 @@ func TestStockOrderSplitReEvaluation(t *testing.T) {
 		{
 			Name: "One split/Rename/same count",
 			TestOrders: []Order{
-				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTB", "sell", 2, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTB", "sell", 2, 100.0, 27.0, "USD", 2.0},
 			},
 			TestSplits: []SecurityIN{
 				SecurityIN{1, "TESTA", 1, "TESTB", 1, time.Date(2020, time.September, 5, 15, 00, 0, 0, time.UTC)},
 			},
 			Expected: []Order{
-				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 1, 100.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 1, 100.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTB", "sell", 2, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 1, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 1, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTB", "sell", 2, 100.0, 27.0, "USD", 2.0},
 			},
 		},
 		{
 			Name: "One split/Same Name/New count",
 			TestOrders: []Order{
-				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTA", "sell", 4, 50.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTA", "sell", 4, 50.0, 27.0, "USD", 2.0},
 			},
 			TestSplits: []SecurityIN{
 				SecurityIN{1, "TESTA", 1, "TESTA", 2, time.Date(2020, time.September, 5, 15, 00, 0, 0, time.UTC)},
 			},
 			Expected: []Order{
-				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 2, 50.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 2, 50.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTA", "sell", 4, 50.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 2, 50.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 2, 50.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTA", "sell", 4, 50.0, 27.0, "USD", 2.0},
 			},
 		},
 		{
 			Name: "Two split/New name/Same count/Same Name/New count",
 			TestOrders: []Order{
-				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 1, 100.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC), "TESTB", "sell", 6, 50.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTA", "buy", 1, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 1, 100.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC), "TESTB", "sell", 6, 50.0, 27.0, "USD", 2.0},
 			},
 			TestSplits: []SecurityIN{
 				SecurityIN{1, "TESTA", 1, "TESTB", 1, time.Date(2020, time.September, 5, 15, 00, 0, 0, time.UTC)},
 				SecurityIN{1, "TESTB", 1, "TESTB", 2, time.Date(2020, time.September, 7, 15, 00, 0, 0, time.UTC)},
 			},
 			Expected: []Order{
-				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 2, 50.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 2, 50.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 2, 50.0, 27.0, "USD", 2.0},
-				Order{time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC), "TESTB", "sell", 6, 50.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 3, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 2, 50.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 4, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 2, 50.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 6, 16, 30, 0, 0, time.UTC), "TESTB", "buy", 2, 50.0, 27.0, "USD", 2.0},
+				Order{time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC), time.Date(2020, time.September, 8, 16, 30, 0, 0, time.UTC), "TESTB", "sell", 6, 50.0, 27.0, "USD", 2.0},
 			},
 		},
 	}
