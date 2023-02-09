@@ -194,17 +194,12 @@ func ExelCreate(tch <-chan map[string][]trading.Trade, dch <-chan []dividends.Ca
 			f.SetCellValue(sheet1Name, fmt.Sprintf("F%d", tradeIndex), trade.OpenUahRate)
 			f.SetCellValue(sheet1Name, fmt.Sprintf("G%d", tradeIndex), trade.CloseDate)
 			f.SetCellValue(sheet1Name, fmt.Sprintf("H%d", tradeIndex), trade.ClosePrice)
-			// f.SetCellValue(sheet1Name, fmt.Sprintf("I%d", tradeIndex), trade.CloseComission)
-			// f.SetCellValue(sheet1Name, fmt.Sprintf("J%d", tradeIndex), trade.CloseUahRate)
-			// f.SetCellValue(sheet1Name, fmt.Sprintf("K%d", tradeIndex), trade.Quantity)
-			// f.SetCellFormula(sheet1Name, fmt.Sprintf("L%d", tradeIndex), fmt.Sprintf("ROUND(((H%[1]d*K%[1]d-I%[1]d)*J%[1]d); 2)", tradeIndex))
-			// f.SetCellFormula(sheet1Name, fmt.Sprintf("M%d", tradeIndex), fmt.Sprintf("ROUND(((D%[1]d*K%[1]d+E%[1]d)*F%[1]d); 2)", tradeIndex))
-			// f.SetCellFormula(sheet1Name, fmt.Sprintf("N%d", tradeIndex), fmt.Sprintf("L%[1]d-M%[1]d", tradeIndex))
-			f.SetCellValue(sheet1Name, fmt.Sprintf("I%d", tradeIndex), trade.CloseUahRate)
-			f.SetCellValue(sheet1Name, fmt.Sprintf("J%d", tradeIndex), trade.Quantity)
-			f.SetCellFormula(sheet1Name, fmt.Sprintf("K%d", tradeIndex), fmt.Sprintf("ROUND(((H%[1]d*J%[1]d)*I%[1]d); 2)", tradeIndex))
-			f.SetCellFormula(sheet1Name, fmt.Sprintf("L%d", tradeIndex), fmt.Sprintf("ROUND(((D%[1]d*J%[1]d+E%[1]d)*F%[1]d); 2)", tradeIndex)) // we use only Open Comission according to rule, CloseComission is not used
-			f.SetCellFormula(sheet1Name, fmt.Sprintf("M%d", tradeIndex), fmt.Sprintf("K%[1]d-L%[1]d", tradeIndex))
+			f.SetCellValue(sheet1Name, fmt.Sprintf("I%d", tradeIndex), trade.CloseComission)
+			f.SetCellValue(sheet1Name, fmt.Sprintf("J%d", tradeIndex), trade.CloseUahRate)
+			f.SetCellValue(sheet1Name, fmt.Sprintf("K%d", tradeIndex), trade.Quantity)
+			f.SetCellFormula(sheet1Name, fmt.Sprintf("L%d", tradeIndex), fmt.Sprintf("ROUND(((H%[1]d*K%[1]d)*J%[1]d); 2)", tradeIndex)) // commision is not counted for Cyprus residents(FF Europ is registered on Cyprus) according to UA ligislation
+			f.SetCellFormula(sheet1Name, fmt.Sprintf("M%d", tradeIndex), fmt.Sprintf("ROUND(((D%[1]d*K%[1]d)*F%[1]d); 2)", tradeIndex)) // commision is not counted for Cyprus residents(FF Europ is registered on Cyprus) according to UA ligislation
+			f.SetCellFormula(sheet1Name, fmt.Sprintf("N%d", tradeIndex), fmt.Sprintf("L%[1]d-M%[1]d", tradeIndex))
 			// generate details
 			f.SetCellValue(sheet4Name, fmt.Sprintf("A%d", tradeIndex), fmt.Sprintf("акція %v %d шт / куплено %v/ продано %v", stock, trade.Quantity, trade.OpenDate, trade.CloseDate))
 			tradeIndex += 1
