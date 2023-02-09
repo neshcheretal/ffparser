@@ -7,8 +7,6 @@ import (
 	"net/http"
 	"sync"
 	"time"
-	"io"
-	"strings"
 )
 
 type Currency struct {
@@ -53,13 +51,6 @@ func GetConversionRates(date time.Time, currency string) (float64, error) {
 			return float64(0), err
 		}
 		defer resp.Body.Close()
-
-		buf := new(strings.Builder)
-    n, err := io.Copy(buf, resp.Body)
-    // check errors
-    fmt.Println(buf.String())
-		fmt.Println(n)
-		//fmt.Printf("%v", bs)
 
 		json.NewDecoder(resp.Body).Decode(&currencyRates)
 
