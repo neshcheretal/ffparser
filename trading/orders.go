@@ -10,6 +10,7 @@ import (
 // Type for broker transaction (separate stock buy or sell orders)
 type Order struct {
 	Date        time.Time
+	PayDate     time.Time
 	Ticker      string
 	Transaction string
 	Quantity    int
@@ -47,8 +48,14 @@ func (s *StockOrders) setSoldCount(newSoldCount int) {
 func OrderListPreparator(jsonOrders []jsonreport.JsonOrder) ([]Order, error) {
 	orders := make([]Order, 0)
 	dateLayout := "2006-01-02 15:04:05"
+	payDateLayout := "2006-01-02"
 	for _, trade := range jsonOrders {
 		orderDate, err := time.Parse(dateLayout, trade.Date)
+		if err != nil {
+			return nil, err
+		}
+
+		orderPayDate, err := time.Parse(payDateLayout, trade.Pay_d)
 		if err != nil {
 			return nil, err
 		}
@@ -68,13 +75,14 @@ func OrderListPreparator(jsonOrders []jsonreport.JsonOrder) ([]Order, error) {
 		orderPrice := trade.P
 		orderCurrency := trade.Curr_c
 		orderComission := trade.Commission
-		orderUsdPriceUah, err := nbu.GetConversionRates(orderDate, orderCurrency)
+		orderUsdPriceUah, err := nbu.GetConversionRates(orderPayDate, orderCurrency)
 		if err != nil {
 			return nil, err
 		}
 
 		newtransact := Order{
 			orderDate,
+			orderPayDate,
 			orderTicker,
 			orderTransaction,
 			orderQuantity,
